@@ -6,8 +6,6 @@ fun main(args: Array<String>) {
     println("Вторая задача - 2")
     println("Третья задача - 3")
     println("Четвертая задача - 4")
-    println("Пятая задача - 5")
-    println("Шестая задача - 6")
     println("Введите задачу какую хотите увидеть - ")
 
     val inp = readLine()
@@ -18,6 +16,7 @@ fun main(args: Array<String>) {
         "1" -> teat1()
         "2" -> teat2()
         "3" -> teat3()
+        "4" -> teat4()
 
         else -> print("Ввести надо одну цифру...")
     }
@@ -104,4 +103,25 @@ fun teat3()
     } catch (e: Exception) {
         println("Ошибка ввода: введите целое число")
     }
+}
+
+fun teat4()
+{
+    //Задание 4
+
+    println("Введите натуральное число:")
+    val input = readLine()
+
+    try {
+        val number = input?.toInt() ?: throw Exception("Пустой ввод")
+        if (number < 0)
+        {
+            println("введите неотрицательное число")
+            return
+        }
+        println("В двоичной системе: ${number.toString(2)}")
+    } catch (e: Exception) {
+        println("Ошибка ввода: введите целое число")
+    }
+
 }
