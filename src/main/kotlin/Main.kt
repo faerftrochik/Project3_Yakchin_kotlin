@@ -36,29 +36,15 @@ fun teat1()
             "Ножницы побеждают бумагу («ножницы разрезают бумагу»). \n" +
             "Если игроки показали одинаковый знак, то засчитывается ничья и игра переигрывается.")
     println("Хотите начать игру? => ")
-    val input = readLine() ?: ""
-    if (input.isEmpty()) {
+    val igrok = readLine() ?: ""
+    if (igrok.isEmpty()) {
         println("Строка пустая")
         return
     }
 
-    var result = ""
-    var count = 1
+    var result = 0;
 
-    for (i in 1 until input.length) {
-        if (input[i] == input[i - 1]) {
-            count++
-        } else {
-            result += input[i - 1]
-            if (count > 1) result += count
-            count = 1
-        }
-    }
-
-    result += input.last()
-    if (count > 1) result += count
-
-    println("Результат: $result")
+    println("Результат игры: Выйграл $result")
 }
 
 fun teat2()
