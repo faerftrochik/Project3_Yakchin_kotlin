@@ -72,15 +72,18 @@ fun teat2()
 
     val table = mutableMapOf<String, String>()
     var num = 1
-    for (a in 'А'..'Я') {
-        for (b in 'А'..'Я') {
+    for (a in 'А'..'Я')
+    {
+        for (b in 'А'..'Я')
+        {
             table["$a$b"] = num.toString().padStart(3, '0')
             num++
         }
     }
 
     var result = ""
-    for (i in 0 until fix.length step 2) {
+    for (i in 0 until fix.length step 2)
+    {
         val pair = "" + fix[i] + fix[i+1]
         result += table[pair] + " "
     }
@@ -91,6 +94,8 @@ fun teat3()
 {
     //Задание  1 из 2го
 
+    println("Вы вошли в задачу 3 => ")
+
     println("Введите количество строк:")
     val rows = readLine()!!.toInt()
     println("Введите количество столбцов:")
@@ -98,21 +103,26 @@ fun teat3()
 
     val arr = Array(rows){IntArray(cols)}
     println("Введите трехзначные числа:")
-    for (i in 0 until rows) {
-        for (j in 0 until cols) {
+    for (i in 0 until rows)
+    {
+        for (j in 0 until cols)
+        {
             arr[i][j] = readLine()!!.toInt()
         }
     }
 
     val digits = mutableSetOf<Char>()
-    for (i in 0 until rows) {
-        for (j in 0 until cols) {
+    for (i in 0 until rows)
+    {
+        for (j in 0 until cols)
+        {
             for (c in arr[i][j].toString()) digits.add(c)
         }
     }
 
     println("Массив:")
-    for (i in 0 until rows){
+    for (i in 0 until rows)
+    {
         for (j in 0 until cols) print("${arr[i][j]} ")
         println()
     }
@@ -122,6 +132,8 @@ fun teat3()
 fun teat4()
 {
     //Задание 3 из 2го
+
+    println("Вы вошли в задачу 4 => ")
 
     val alphabet = arrayOf(
         'А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н','О','П',
@@ -142,7 +154,8 @@ fun teat4()
 
     var result = ""
     var k = 0
-    for (c in text){
+    for (c in text)
+    {
         val shift = nums[ findIndex(key[k]) ]
         val pos = findIndex(c)
         val newPos =
@@ -158,12 +171,15 @@ fun teat5()
 {
     //Задание 5 из 2го
 
+    println("Вы вошли в задачу 5 => ")
+
     println("Введите количество слов:")
     val n = readLine()!!.toInt()
     val map = mutableMapOf<String, MutableList<String>>()
 
     println("Введите слова:")
-    for (i in 0 until n){
+    for (i in 0 until n)
+    {
         val w = readLine()!!.lowercase()
         val key = w.toCharArray().sorted().joinToString("")
         map.putIfAbsent(key, mutableListOf())
@@ -171,7 +187,8 @@ fun teat5()
     }
 
     println("Группы:")
-    for (g in map.values){
+    for (g in map.values)
+    {
         println(g.joinToString(", "))
     }
 }
