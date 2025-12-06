@@ -6,6 +6,7 @@ fun main(args: Array<String>) {
     println("Вторая задача - 2")
     println("Третья задача - 3")
     println("Четвертая задача - 4")
+    println("Пятая задача - 5")
     println("Введите задачу какую хотите увидеть - ")
 
     val inp = readLine()
@@ -17,6 +18,7 @@ fun main(args: Array<String>) {
         "2" -> teat2()
         "3" -> teat3()
         "4" -> teat4()
+        "5" -> teat5()
 
         else -> print("Ввести надо одну цифру...")
     }
@@ -87,41 +89,89 @@ fun teat2()
 
 fun teat3()
 {
-    //Задание 3
+    //Задание  1 из 2го
 
-    println("Введите натуральное число:")
-    val input = readLine()
+    println("Введите количество строк:")
+    val rows = readLine()!!.toInt()
+    println("Введите количество столбцов:")
+    val cols = readLine()!!.toInt()
 
-    try {
-        val number = input?.toInt() ?: throw Exception("Пустой ввод")
-        if (number < 0)
-        {
-            println("введите неотрицательное число")
-            return
+    val arr = Array(rows){IntArray(cols)}
+    println("Введите трехзначные числа:")
+    for (i in 0 until rows) {
+        for (j in 0 until cols) {
+            arr[i][j] = readLine()!!.toInt()
         }
-        println("В двоичной системе: ${number.toString(2)}")
-    } catch (e: Exception) {
-        println("Ошибка ввода: введите целое число")
     }
+
+    val digits = mutableSetOf<Char>()
+    for (i in 0 until rows) {
+        for (j in 0 until cols) {
+            for (c in arr[i][j].toString()) digits.add(c)
+        }
+    }
+
+    println("Массив:")
+    for (i in 0 until rows){
+        for (j in 0 until cols) print("${arr[i][j]} ")
+        println()
+    }
+    println("Различных цифр: ${digits.size}")
 }
 
 fun teat4()
 {
-    //Задание 4
+    //Задание 3 из 2го
 
-    println("Введите натуральное число:")
-    val input = readLine()
+    val alphabet = arrayOf(
+        'А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н','О','П',
+        'Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ь','Ы','Ъ','Э','Ю','Я'
+    )
+    val nums = IntArray(33)
+    println("Введите 33 числа:")
+    for (i in 0..32) nums[i] = readLine()!!.toInt()
 
-    try {
-        val number = input?.toInt() ?: throw Exception("Пустой ввод")
-        if (number < 0)
-        {
-            println("введите неотрицательное число")
-            return
-        }
-        println("В двоичной системе: ${number.toString(2)}")
-    } catch (e: Exception) {
-        println("Ошибка ввода: введите целое число")
+    println("1 - шифровать, 2 - расшифровать:")
+    val mode = readLine()!!.toInt()
+    println("Введите текст:")
+    val text = readLine()!!.uppercase()
+    println("Введите ключ:")
+    val key = readLine()!!.uppercase()
+
+    fun findIndex(ch: Char): Int = alphabet.indexOf(ch)
+
+    var result = ""
+    var k = 0
+    for (c in text){
+        val shift = nums[ findIndex(key[k]) ]
+        val pos = findIndex(c)
+        val newPos =
+            if (mode == 1) (pos + shift) % 33
+            else (pos - shift + 33) % 33
+        result += alphabet[newPos]
+        k++; if (k == key.length) k = 0
+    }
+    println(result)
+}
+
+fun teat5()
+{
+    //Задание 5 из 2го
+
+    println("Введите количество слов:")
+    val n = readLine()!!.toInt()
+    val map = mutableMapOf<String, MutableList<String>>()
+
+    println("Введите слова:")
+    for (i in 0 until n){
+        val w = readLine()!!.lowercase()
+        val key = w.toCharArray().sorted().joinToString("")
+        map.putIfAbsent(key, mutableListOf())
+        map[key]!!.add(w)
     }
 
+    println("Группы:")
+    for (g in map.values){
+        println(g.joinToString(", "))
+    }
 }
