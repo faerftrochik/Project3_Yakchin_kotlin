@@ -61,24 +61,28 @@ fun teat2()
 {
     //Задание 2
 
-    println("Введите строку:")
-    val input = readLine() ?: ""
-    if (input.isEmpty()) {
-        println("Строка пустая")
-        return
+    println("Вы вошли в задачу 2, впишите сообщение что нужно зашифровать => ")
+
+    val text = readLine()!!.uppercase()
+    val helper = 'Я'
+    var fix = text
+    if (fix.length % 2 == 1) fix += helper
+
+    val table = mutableMapOf<String, String>()
+    var num = 1
+    for (a in 'А'..'Я') {
+        for (b in 'А'..'Я') {
+            table["$a$b"] = num.toString().padStart(3, '0')
+            num++
+        }
     }
 
-    val map = mutableMapOf<Char, Int>()
-
-    for (ch in input) {
-        map[ch] = (map[ch] ?: 0) + 1
+    var result = ""
+    for (i in 0 until fix.length step 2) {
+        val pair = "" + fix[i] + fix[i+1]
+        result += table[pair] + " "
     }
-
-    val sorted = map.toSortedMap()
-
-    for ((key, value) in sorted) {
-        println("$key - $value")
-    }
+    println(result)
 }
 
 fun teat3()
